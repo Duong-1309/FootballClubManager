@@ -35,3 +35,6 @@ python manage.py runserver
 ```
 Kết nối database sqlite với PyCharm Pro
 Mở cửa sổ Database(góc phải trên) -> Add -> Data Source -> SQLite -> Chọn file tới file db.sqlite3 của project
+
+
+hello
