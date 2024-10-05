@@ -8,5 +8,8 @@ from home import views
 
 urlpatterns = [
     path('', views.index, name='home'),
-    path('thong-tin-cau-thu/<int:team_id>', views.thongtincauthu, name='thongtincauthu'),
+    path('cau-lac-bo/', views.cau_lac_bo, name='cau-lac-bo'),
+    path('cau-thu/', views.cau_thu, name='cau-thu'),
+    path('huan-luyen-vien/', views.huan_luyen_vien, name='huan-luyen-vien'),
+    path('hop-dong/', views.hop_dong, name='hop-dong'),
 ]

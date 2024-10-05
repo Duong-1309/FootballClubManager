@@ -14,7 +14,31 @@
           <li class="nav-item">
             <a class="nav-link {% if 'index' in segment %} active {% endif %}" href="/">
               <i class="ni ni-tv-2 text-primary"></i>
-              <span class="nav-link-text">Dashboard</span>
+              <span class="nav-link-text">Tranh chính</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'cau_lac_bo' in segment %} active {% endif %}" href="/cau-lac-bo">
+              <i class="ni ni-tv-2 text-primary"></i>
+              <span class="nav-link-text">Câu lạc bộ</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'cau_thu' in segment %} active {% endif %}" href="/cau-thu">
+              <i class="ni ni-tv-2 text-primary"></i>
+              <span class="nav-link-text">Cầu thủ</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'huan_luyen_vien' in segment %} active {% endif %}" href="/huan-luyen-vien">
+              <i class="ni ni-tv-2 text-primary"></i>
+              <span class="nav-link-text">Huấn luyện viên</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'hop_dong' in segment %} active {% endif %}" href="/hop-dong">
+              <i class="ni ni-tv-2 text-primary"></i>
+              <span class="nav-link-text">Hợp đồng</span>
             </a>
           </li>
 <!--          <li class="nav-item">-->
@@ -41,18 +65,18 @@
 <!--              <span class="nav-link-text">Tables</span>-->
 <!--            </a>-->
 <!--          </li>-->
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">
-              <i class="ni ni-user-run text-red"></i>
-              <span class="nav-link-text">Hello</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">
-              <i class="ni ni-user-run text-red"></i>
-              <span class="nav-link-text">Logout</span>
-            </a>
-          </li>            
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" href="{% url 'logout' %}">-->
+<!--              <i class="ni ni-user-run text-red"></i>-->
+<!--              <span class="nav-link-text">Hello</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" href="{% url 'logout' %}">-->
+<!--              <i class="ni ni-user-run text-red"></i>-->
+<!--              <span class="nav-link-text">Logout</span>-->
+<!--            </a>-->
+<!--          </li>            -->
         </ul>
         <!-- Divider -->
       </div>
