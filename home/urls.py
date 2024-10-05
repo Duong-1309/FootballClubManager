@@ -8,4 +8,5 @@ from home import views
 
 urlpatterns = [
     path('', views.index, name='home'),
+    path('thong-tin-cau-thu/<int:team_id>', views.thongtincauthu, name='thongtincauthu'),
 ]
