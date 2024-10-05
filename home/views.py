@@ -18,7 +18,11 @@ def cau_lac_bo(request):
     html_template = loader.get_template('home/cau-lac-bo.html')
     return HttpResponse(html_template.render(context, request))
 
-
+@login_required(login_url="/login/")
+def chi_tiet_cau_lac_bo(request):
+    context = {'segment': 'chi-tiet-cau-lac-bo'}
+    html_template = loader.get_template('home/chi-tiet-cau-lac-bo.html')
+    return HttpResponse(html_template.render(context, request))
 @login_required(login_url="/login/")
 def cau_thu(request):
     context = {'segment': 'cau_thu'}

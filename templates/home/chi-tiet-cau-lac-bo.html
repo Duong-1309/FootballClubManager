@@ -1,0 +1,117 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="#">Câu lạc bộ</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Mặc định</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            </div>
+          </div>
+          <!-- Card stats -->
+        </div>
+      </div>
+    </div> <!-- Close the header div here -->
+
+    <div class="container">
+        <h2>Chi tiết câu lạc bộ - tên câu lạc bộ</h2>
+
+        <!-- Phần thông tin chính -->
+        <div class="club-details">
+            <div class="club-logo">
+                <img src="duong_dan_logo_cau_lac_bo.png" alt="Club Logo">
+            </div>
+            <div class="club-info">
+                <div class="stat-card">
+                    <h3>Số lượng cầu thủ</h3>
+                    <p>23,423</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Số lượng huấn luyện viên</h3>
+                    <p>3</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Sân vận động</h3>
+                    <p>ABCD</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Năm thành lập</h3>
+                    <p>1900</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Danh sách huấn luyện viên -->
+        <h3>Danh sách huấn luyện viên</h3>
+        <table class="table-coaches">
+            <thead>
+                <tr>
+                    <th>Check</th>
+                    <th>Tên</th>
+                    <th>Ngày dẫn dắt</th>
+                    <th>Abcd</th>
+                    <th>Icon</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Username</td>
+                    <td>Content</td>
+                    <td><span class="tag">New tag</span></td>
+                    <td><i class="edit-icon">✎</i></td>
+                </tr>
+                <!-- Thêm các hàng khác tương tự -->
+            </tbody>
+        </table>
+
+        <!-- Danh sách cầu thủ -->
+        <h3>Danh sách cầu thủ</h3>
+        <table class="table-players">
+            <thead>
+                <tr>
+                    <th>Check</th>
+                    <th>Tên</th>
+                    <th>Ngày gia nhập</th>
+                    <th>Abcd</th>
+                    <th>Icon</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Username</td>
+                    <td>Content</td>
+                    <td><span class="tag">New tag</span></td>
+                    <td><i class="edit-icon">✎</i></td>
+                </tr>
+                <!-- Thêm các hàng khác tương tự -->
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+  <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}
