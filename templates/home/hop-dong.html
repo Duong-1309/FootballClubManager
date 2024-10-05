@@ -55,59 +55,35 @@
                         </tr>
                         </thead>
                         <tbody class="list">
+                        {% for hop_dong in ds_hop_dong %}
                         <tr>
-                            <td class="budget">
-                                1
-                            </td>
+                            <td class="budget">{{hop_dong.ma_hop_dong}}</td>
+                            <td class="budget">{{hop_dong.ngay_bat_dau|date:"d/m/y"}}</td>
+                            <td class="budget">{{hop_dong.ngay_ket_thuc|date:"d/m/y"}}</td>
+                            <td class="budget">{{hop_dong.luong}}</td>
+                            <td class="budget">{{hop_dong.thuong}}</td>
+                            <td class="budget">{{hop_dong.phi_pha_vo_hop_dong}}</td>
                             <td>
-                    <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i>
-                      <span class="status">pending</span>
-                    </span>
-                            </td>
-                            <td>
+                                {% if hop_dong.cau_thu %}
                                 <div class="avatar-group">
                                     <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Ryan Tompson">
+                                       data-original-title="{{ hop_dong.cau_thu.ten}}">
                                         <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg">
                                     </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Romina Hadid">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-2.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Alexander Smith">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-3.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Jessica Doe">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-4.jpg">
-                                    </a>
+                                    <label class="top" >{{ hop_dong.cau_thu.ten}}</label>
                                 </div>
+                                {% endif %}
                             </td>
                             <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="completion mr-2">60%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 60%;"></div>
-                                        </div>
-                                    </div>
+                                {% if hop_dong.huan_luyen_vien %}
+                                <div class="avatar-group">
+                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
+                                       data-original-title="{{ hop_dong.cau_thu.ten}}">
+                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg">
+                                    </a>
+                                    <label>{{ hop_dong.huan_luyen_vien.ten}}</label>
                                 </div>
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
+                                {% endif %}
                             </td>
                             <td class="text-right">
                                 <div class="dropdown">
@@ -116,218 +92,13 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Chi tiết</a>
+                                        <a class="dropdown-item" href="#">Xuất hợp đồng</a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td>
-                    <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i>
-                      <span class="status">pending</span>
-                    </span>
-                            </td>
-                            <td>
-                                <div class="avatar-group">
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Ryan Tompson">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Romina Hadid">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-2.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Alexander Smith">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-3.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Jessica Doe">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-4.jpg">
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="completion mr-2">60%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td>
-                    <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i>
-                      <span class="status">pending</span>
-                    </span>
-                            </td>
-                            <td>
-                                <div class="avatar-group">
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Ryan Tompson">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Romina Hadid">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-2.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Alexander Smith">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-3.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Jessica Doe">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-4.jpg">
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="completion mr-2">60%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td>
-                    <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i>
-                      <span class="status">pending</span>
-                    </span>
-                            </td>
-                            <td>
-                                <div class="avatar-group">
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Ryan Tompson">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Romina Hadid">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-2.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Alexander Smith">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-3.jpg">
-                                    </a>
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="Jessica Doe">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-4.jpg">
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="completion mr-2">60%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="budget">
-                                1
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
