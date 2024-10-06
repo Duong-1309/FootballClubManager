@@ -148,6 +148,7 @@ table td {
                 <th>Ảnh</th>
                 <th>Tên</th>
                 <th>Ngày sinh</th>
+                <th>Chuyên môn</th>
                 <th>Thành tích</th>
             </tr>
         </thead>
@@ -157,6 +158,7 @@ table td {
                 <td><img src="{{ HuanLuyenVien.hinh_anh }}" alt="{{ HuanLuyenVien.ten }}" style="width: 65px; height: 50px;"></td>
                 <td>{{ HuanLuyenVien.ten }}</td>
                 <td>{{ HuanLuyenVien.ngay_sinh }}</td>
+                <td>{{ HuanLuyenVien.chuyen_mon }}</td>
                 <td>{{ HuanLuyenVien.danh_hieu }}</td>
             </tr>
             {% endfor %}
