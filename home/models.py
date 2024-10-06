@@ -34,6 +34,7 @@ class CauThu(models.Model):
     so_ao = models.IntegerField()
     danh_hieu = models.TextField(null=True, blank=True)
     doi_bong = models.ForeignKey(DoiBong, on_delete=models.CASCADE)
+    hinh_anh = models.CharField(max_length=255, null=True)
 
     class Meta:
         db_table = 'CauThu'
@@ -47,6 +48,7 @@ class HuanLuyenVien(models.Model):
     chuyen_mon = models.CharField(max_length=100)
     danh_hieu = models.TextField(null=True, blank=True)
     doi_bong = models.ForeignKey(DoiBong, on_delete=models.CASCADE)
+    hinh_anh = models.CharField(max_length=255, null=True)
 
     class Meta:
         db_table = 'HuanLuyenVien'
