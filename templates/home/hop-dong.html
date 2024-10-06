@@ -3,7 +3,9 @@
 {% block title %} Dashboard {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+
+{% endblock stylesheets %}
 
 {% block content %}
 <!-- Header -->
@@ -66,7 +68,7 @@
                             <td>
                                 {% if hop_dong.cau_thu %}
                                 <div class="avatar-group">
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
+                                    <a href="/cau-thu/{{hop_dong.cau_thu.ma_cau_thu}}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
                                        data-original-title="{{ hop_dong.cau_thu.ten}}">
                                         <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg">
                                     </a>
@@ -139,5 +141,4 @@
 
 <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
 <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
-
 {% endblock javascripts %}

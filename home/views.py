@@ -66,6 +66,16 @@ def cau_thu(request):
     html_template = loader.get_template('home/cau-thu.html')
     return HttpResponse(html_template.render(context, request))
 
+@login_required(login_url="/login/")
+def chi_tiet_cau_thu(request, id):
+    cau_thu = CauThu.objects.filter(pk=id).first()
+    if not cau_thu:
+        html_template = loader.get_template('home/page-404.html')
+        return HttpResponse(html_template.render({}, request))
+    context = {'segment': 'cau_thu', 'cau_thu': cau_thu}
+    html_template = loader.get_template('home/chi-tiet-cau-thu.html')
+    return HttpResponse(html_template.render(context, request))
+
 
 @login_required(login_url="/login/")
 def huan_luyen_vien(request):

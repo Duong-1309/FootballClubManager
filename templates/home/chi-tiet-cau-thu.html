@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0f2f5;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .player-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .player-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 20px;
+    }
+    .player-name {
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .details {
+        background-color: #f0f2f5;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .details p {
+        margin: 10px 0;
+    }
+    .details strong {
+        display: inline-block;
+        width: 100px;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1>Chi tiết cầu thủ {{cau_thu.ten}}</h1>
+    <div class="player-info">
+        <img src="/api/placeholder/100/100" alt="Erling Haaland" class="player-photo">
+        <div class="player-name">Erling Haaland</div>
+    </div>
+    <div class="details">
+        <p><strong>Ngày sinh:</strong> </p>
+        <p><strong>Quốc tịch:</strong> </p>
+        <p><strong>Chiều cao:</strong> </p>
+        <p><strong>Số áo:</strong> </p>
+        <p><strong>Vị trí:</strong> </p>
+        <p><strong>CLB:</strong> </p>
+    </div>
+</div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}
