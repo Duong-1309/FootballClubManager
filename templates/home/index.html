@@ -3,7 +3,19 @@
 {% block title %} Dashboard {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<style>
+    .chart-container {
+        width: 80%;
+        max-width: 600px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -35,17 +47,19 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Số cầu thủ</h5>
-                                    <span class="h2 font-weight-bold mb-0">350</span>
+                                    <span class="h2 font-weight-bold mb-0">{{tong_quan.cau_thu}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                        <i class="ni ni-active-40"></i>
+                                        <i class="ni ni-user-run"></i>
                                     </div>
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-sm">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                                <span class="text-nowrap">Since last month</span>
+                                <span class="text-success mr-2">
+<!--                                    <i class="fa fa-arrow-up"></i>-->
+                                    ---</span>
+<!--                                <span class="text-nowrap">Since last month</span>-->
                             </p>
                         </div>
                     </div>
@@ -57,17 +71,19 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Số lượng HLV</h5>
-                                    <span class="h2 font-weight-bold mb-0">20</span>
+                                    <span class="h2 font-weight-bold mb-0">{{tong_quan.hlv}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                                        <i class="ni ni-chart-pie-35"></i>
+                                        <i class="ni ni-glasses-2"></i>
                                     </div>
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-sm">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                                <span class="text-nowrap">Since last month</span>
+                                <span class="text-success mr-2">
+<!--                                    <i class="fa fa-arrow-up"></i> -->
+                                    ---</span>
+<!--                                <span class="text-nowrap">Since last month</span>-->
                             </p>
                         </div>
                     </div>
@@ -79,17 +95,19 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Số hợp đồng</h5>
-                                    <span class="h2 font-weight-bold mb-0">924</span>
+                                    <span class="h2 font-weight-bold mb-0">{{tong_quan.hop_dong.so_luong}}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                        <i class="ni ni-money-coins"></i>
+                                        <i class="ni ni-collection"></i>
                                     </div>
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-sm">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                                <span class="text-nowrap">Since last month</span>
+                                <span class="text-success mr-2">
+                                    <i class="fa fa-arrow-up"></i>
+                                    {{tong_quan.hop_dong.tang}}</span>
+                                <span class="text-nowrap">So với tháng trước</span>
                             </p>
                         </div>
                     </div>
@@ -98,7 +116,7 @@
                     <div class="card card-stats">
                         <div class="card-body d-flex align-items-center justify-content-center">
                             <img class="img-fluid" src="static/assets/img/cau thu/logo khác/Hamburger SV logo.png"
-                                 alt="Logo">
+                                 alt="Logo" style="max-width: 90px; border-radius: 50%; border: 2px solid #fff" >
                         </div>
                     </div>
                 </div>
@@ -116,7 +134,7 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h6 class="text-light text-uppercase ls-1 mb-1">Thống kê</h6>
-                            <h5 class="h3 text-white mb-0">Sales</h5>
+                            <h5 class="h3 text-white mb-0">Biểu đồ cột</h5>
                         </div>
                         <div class="col">
                             <ul class="nav nav-pills justify-content-end">
@@ -135,7 +153,7 @@
                     <!-- Chart -->
                     <div class="chart">
                         <!-- Chart wrapper -->
-                        <canvas id="chart-bars" class="chart-canvas"></canvas>
+                        <canvas id="bieu-do-cot"></canvas>
                     </div>
                 </div>
             </div>
@@ -146,14 +164,14 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h6 class="text-uppercase text-muted ls-1 mb-1">Thống kê</h6>
-                            <h5 class="h3 mb-0">Statistic</h5>
+                            <h5 class="h3 mb-0">Lương</h5>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <!-- Chart -->
                     <div class="chart">
-                        <canvas id="chart-bars" class="chart-canvas"></canvas>
+                        <canvas id="pie-chart-luong" data-luong="{{bieu_do_luong}}"></canvas>
                     </div>
                 </div>
             </div>
@@ -168,7 +186,65 @@
 
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const elm = document.getElementById('pie-chart-luong');
+        const dataLuongStr = elm.getAttribute('data-luong');
+        let dataLuong = dataLuongStr.replace(/'/g, '"');
+        dataLuong = JSON.parse(dataLuong);
 
+        const ctx = elm.getContext('2d');
+        new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: dataLuong.labels,
+            datasets: [{
+                data: dataLuong.data,
+                backgroundColor: [
+                    '#36A2EB',
+                    '#9966FF'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.parsed;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+        const ctx2 = document.getElementById('bieu-do-cot').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+
+    });
+</script>
 <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
 <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
 
