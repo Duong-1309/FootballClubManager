@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class DoiBong(models.Model):
     ma_doi_bong = models.AutoField(primary_key=True)
+    logo = models.CharField(max_length=255, null=True)
     ten = models.CharField(max_length=100)
     san_van_dong = models.CharField(max_length=100)
     nam_thanh_lap = models.IntegerField()
