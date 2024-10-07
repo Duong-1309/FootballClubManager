@@ -13,5 +13,6 @@ urlpatterns = [
     path('cau-thu/', views.cau_thu, name='cau-thu'),
     path('cau-thu/<int:id>/', views.chi_tiet_cau_thu, name='chi-tiet-cau-thu'),
     path('huan-luyen-vien/', views.huan_luyen_vien, name='huan-luyen-vien'),
+    path('huan-luyen-vien/<int:id>/', views.chi_tiet_huan_luyen_vien, name='chi-tiet-huan-luyen-vien'),
     path('hop-dong/', views.hop_dong, name='hop-dong'),
 ]

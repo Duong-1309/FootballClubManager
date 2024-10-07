@@ -74,7 +74,13 @@ def chi_tiet_cau_thu(request, id):
     if not cau_thu:
         html_template = loader.get_template('home/page-404.html')
         return HttpResponse(html_template.render({}, request))
-    context = {'segment': 'cau_thu', 'cau_thu': cau_thu}
+    hop_dong = HopDong.objects.filter(cau_thu=cau_thu).first()
+    context = {
+        'segment': 'cau_thu',
+        'cau_thu': cau_thu,
+        'hop_dong': hop_dong,
+        'danh_hieu': cau_thu.danh_hieu.split(",") if cau_thu.danh_hieu else []
+    }
     html_template = loader.get_template('home/chi-tiet-cau-thu.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -85,6 +91,22 @@ def huan_luyen_vien(request):
     html_template = loader.get_template('home/huan-luyen-vien.html')
     return HttpResponse(html_template.render(context, request))
 
+@login_required(login_url="/login/")
+def chi_tiet_huan_luyen_vien(request, id):
+    hlv = HuanLuyenVien.objects.filter(pk=id).first()
+    if not hlv:
+        html_template = loader.get_template('home/page-404.html')
+        return HttpResponse(html_template.render({}, request))
+    hop_dong = HopDong.objects.filter(huan_luyen_vien=hlv).first()
+    context = {
+        'segment': 'huan_luyen_vien',
+        'hlv': hlv,
+        'tuoi': datetime.date.today().year - hlv.ngay_sinh.year if hlv.ngay_sinh else None,
+        'hop_dong': hop_dong,
+        'danh_hieu': hlv.danh_hieu.split(",") if hlv.danh_hieu else []
+    }
+    html_template = loader.get_template('home/chi-tiet-huan-luyen-vien.html')
+    return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
 def hop_dong(request):

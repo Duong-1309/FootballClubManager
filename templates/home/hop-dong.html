@@ -70,7 +70,7 @@
                                 <div class="avatar-group">
                                     <a href="/cau-thu/{{hop_dong.cau_thu.ma_cau_thu}}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
                                        data-original-title="{{ hop_dong.cau_thu.ten}}">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg">
+                                        <img src="{{hop_dong.cau_thu.hinh_anh}}">
                                     </a>
                                     <label class="top" >{{ hop_dong.cau_thu.ten}}</label>
                                 </div>
@@ -79,9 +79,9 @@
                             <td>
                                 {% if hop_dong.huan_luyen_vien %}
                                 <div class="avatar-group">
-                                    <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                       data-original-title="{{ hop_dong.cau_thu.ten}}">
-                                        <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg">
+                                    <a href="/huan-luyen-vien/{{hop_dong.huan_luyen_vien.pk}}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
+                                       data-original-title="{{ hop_dong.huan_luyen_vien.ten}}">
+                                        <img alt="Image placeholder" src="{{hop_dong.huan_luyen_vien.hinh_anh}}">
                                     </a>
                                     <label>{{ hop_dong.huan_luyen_vien.ten}}</label>
                                 </div>

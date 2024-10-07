@@ -83,22 +83,21 @@
 
 <div class="container">
     <div class="header mt-3">
-        <h2>Chi tiết cầu thủ</h2>
+        <h2>Chi tiết huấn luyện viên</h2>
     </div>
     <div class="profile">
-        <img src="{{cau_thu.hinh_anh}}" class="profile-image">
+        <img src="{{hlv.hinh_anh}}" class="profile-image">
         <div class="profile-details">
-            <div class="profile-name">{{cau_thu.ten}}</div>
-            <div style="font-size: 20px">Quốc tịch: {{cau_thu.quoc_tich}}</div>
+            <div class="profile-name">{{hlv.ten}}</div>
+            <div style="font-size: 20px">Quốc tịch: {{hlv.quoc_tich}}</div>
             <div class="profile-info">
                 <div>
-                    <div>Ngày sinh: {{cau_thu.ngay_sinh|date:"d/m/Y"}} ({{cau_thu.tuoi}} tuổi)</div>
+                    <div>Ngày sinh: {{hlv.ngay_sinh|date:"d/m/Y"}} ({{tuoi}} tuổi)</div>
+                    <div>Chiều cao: {{hlv.chieu_cao}}m</div>
                     <div>
-                        Câu lạc bộ: <a href="/cau-lac-bo/{{cau_thu.doi_bong.pk}}" >{{cau_thu.doi_bong.ten}}</a>
+                        Câu lạc bộ: <a href="/cau-lac-bo/{{hlv.doi_bong.pk}}" >{{hlv.doi_bong.ten}}</a>
                     </div>
-                    <div>Vị trí: {{cau_thu.vi_tri}}</div>
-                     <div>Số áo: {{cau_thu.so_ao}}</div>
-                    <div>Chiều cao: {{cau_thu.chieu_cao}}m</div>
+                    <div>Chuyên môn: {{hlv.chuyen_mon}}</div>
                 </div>
             </div>
         </div>
