@@ -20,6 +20,8 @@ def index(request):
         ngay_bat_dau__lt=datetime.date.today() - datetime.timedelta(days=7)
     ).count()
     tong_quan = {
+        "hlv": s_hlv,
+        "cau_thu": s_cau_thu,
         "hop_dong": {
             "so_luong": s_hop_dong,
             "tang": round((s_hop_dong - s_hop_dong_thang_truoc) / s_hop_dong_thang_truoc * 100,
