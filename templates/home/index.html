@@ -134,7 +134,7 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h6 class="text-light text-uppercase ls-1 mb-1">Thống kê</h6>
-                            <h5 class="h3 text-white mb-0">Biểu đồ cột</h5>
+                            <h5 class="h3 text-white mb-0">Số lượng cầu thủ theo câu lạc bộ</h5>
                         </div>
                         <div class="col">
                             <ul class="nav nav-pills justify-content-end">
@@ -153,7 +153,7 @@
                     <!-- Chart -->
                     <div class="chart">
                         <!-- Chart wrapper -->
-                        <canvas id="bieu-do-cot"></canvas>
+                        <canvas id="bieu-do-cot" data-cot="{{bieu_do_cau_thu_theo_clb}}"></canvas>
                     </div>
                 </div>
             </div>
@@ -164,14 +164,14 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h6 class="text-uppercase text-muted ls-1 mb-1">Thống kê</h6>
-                            <h5 class="h3 mb-0">Lương</h5>
+                            <h5 class="h3 mb-0">HLV theo câu lạc bộ</h5>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <!-- Chart -->
                     <div class="chart">
-                        <canvas id="pie-chart-luong" data-luong="{{bieu_do_luong}}"></canvas>
+                        <canvas id="pie-chart-luong" data-luong="{{bieu_do_hlv_theo_clb}}"></canvas>
                     </div>
                 </div>
             </div>
@@ -223,14 +223,19 @@
         }
     });
 
-        const ctx2 = document.getElementById('bieu-do-cot').getContext('2d');
+        const elmCot = document.getElementById('bieu-do-cot')
+        const dataCotStr = elmCot.getAttribute('data-cot');
+        let dataCot = dataCotStr.replace(/'/g, '"');
+        dataCot = JSON.parse(dataCot);
+
+        const ctx2 = elmCot.getContext('2d');
         new Chart(ctx2, {
             type: 'bar',
             data: {
-              labels: ['Red', 'Blue', 'Yellow'],
+              labels: dataCot.labels,
               datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3],
+                label: '# cầu thủ',
+                data: dataCot.data,
                 borderWidth: 1
               }]
             },
