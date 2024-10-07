@@ -73,7 +73,14 @@ def chi_tiet_cau_lac_bo(request, DoiBong_id):
     return render(request, 'home/chi-tiet-cau-lac-bo.html', context)
 @login_required(login_url="/login/")
 def cau_thu(request):
-    context = {'segment': 'cau_thu'}
+    ds_cau_thu = CauThu.objects.all().order_by('ten')
+    context = {
+        'ds_cau_thu': ds_cau_thu,
+        'ten_cau_thu': ds_cau_thu,
+        'hinh_anh_cau_thu': ds_cau_thu,
+        'vi_tri_cau_thu': ds_cau_thu,
+
+        'segment': 'cau_thu'}
     html_template = loader.get_template('home/cau-thu.html')
     return HttpResponse(html_template.render(context, request))
 

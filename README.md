@@ -8,9 +8,9 @@ python3 -m venv myvenv
 
 Active môi trường ảo
 ```bash
-# window
-myvenv\Scripts\activate
-# linux, macos
+# windowm
+.venv\Scripts\activate
+# linux, macosvenv\Scripts\activate
 source myvenv/bin/activate
 ``` 
 
