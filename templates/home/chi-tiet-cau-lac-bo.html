@@ -3,112 +3,110 @@
 {% block stylesheets %}
 <style>
     /* Bo tròn và bố cục chính */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    padding: 20px;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+    }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-h2, h3 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
+    h2, h3 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
 
-.club-details {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 40px;
-}
+    .club-details {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+    }
 
-.club-logo img {
-    width: 200px;
-    height: 200px;
-    border-radius: 12px;
-}
+    .club-logo img {
+        width: 200px;
+        height: 200px;
+        border-radius: 12px;
+    }
 
-.club-info {
-    display: flex;
-    justify-content: space-around;
-    width: 70%;
-}
+    .club-info {
+        display: flex;
+        justify-content: space-around;
+        width: 70%;
+    }
 
-.stat-card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    width: 150px;
-}
+    .stat-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        width: 150px;
+    }
 
-.stat-card h3 {
-    font-size: 1rem;
-    color: #555;
-}
+    .stat-card h3 {
+        font-size: 1rem;
+        color: #555;
+    }
 
-.stat-card p {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #000;
-    margin-top: 10px;
-}
+    .stat-card p {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #000;
+        margin-top: 10px;
+    }
 
-/* Bảng danh sách */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 40px;
-}
+    /* Bảng danh sách */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 40px;
+    }
 
-table th, table td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-}
+    table th, table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
 
-table th {
-    background-color: #f0f0f0;
-    color: #555;
-}
+    table th {
+        background-color: #f0f0f0;
+        color: #555;
+    }
 
-table td {
-    background-color: #fff;
-    color: #333;
-}
+    table td {
+        background-color: #fff;
+        color: #333;
+    }
 
-.tag {
-    background-color: #efefef;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #555;
-}
+    .tag {
+        background-color: #efefef;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: #555;
+    }
 
-.edit-icon {
-    cursor: pointer;
-    color: #555;
-    font-size: 1.2rem;
-}
+    .edit-icon {
+        cursor: pointer;
+        color: #555;
+        font-size: 1.2rem;
+    }
 
-/* Bo tròn cho bảng */
-.table-coaches, .table-players {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-</style>    
-    
+    /* Bo tròn cho bảng */
+    .table-coaches, .table-players, .table-achievements {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+</style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -156,7 +154,7 @@ table td {
             {% for HuanLuyenVien in ds_huan_luyen_vien %}
             <tr>
                 <td><img src="{{ HuanLuyenVien.hinh_anh }}" alt="{{ HuanLuyenVien.ten }}" style="width: 65px; height: 50px;"></td>
-                <td><a href="/huan-luyen-vien/{{HuanLuyenVien.pk}}" >{{ HuanLuyenVien.ten }}</a></td>
+                <td><a href="/huan-luyen-vien/{{HuanLuyenVien.pk}}">{{ HuanLuyenVien.ten }}</a></td>
                 <td>{{ HuanLuyenVien.ngay_sinh }}</td>
                 <td>{{ HuanLuyenVien.chuyen_mon }}</td>
                 <td>{{ HuanLuyenVien.danh_hieu }}</td>
@@ -180,9 +178,28 @@ table td {
             {% for CauThu in ds_cau_thu %}
             <tr>
                 <td><img src="{{ CauThu.hinh_anh }}" alt="{{ CauThu.ten }}" style="width: 65px; height: 50px;"></td>
-                <td><a href="/cau-thu/{{CauThu.pk}}/" >{{ CauThu.ten }}</a></td>
+                <td><a href="/cau-thu/{{CauThu.pk}}">{{ CauThu.ten }}</a></td>
                 <td>{{ CauThu.ngay_sinh }}</td>
                 <td>{{ CauThu.vi_tri }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Danh sách thành tích đội bóng -->
+    <h3>Danh sách thành tích đội bóng</h3>
+    <table class="table-achievements">
+        <thead>
+            <tr>
+                <th>Thành tích</th>
+                <th>Năm</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for thanh_tich in ds_thanh_tich %}
+            <tr>
+                <td>{{ thanh_tich.mo_ta }}</td>
+                <td>{{ thanh_tich.nam }}</td>
             </tr>
             {% endfor %}
         </tbody>
