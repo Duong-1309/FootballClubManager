@@ -1,0 +1,144 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1595px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            /*background-color: #4CAF50;*/
+            color: black;
+            padding: 10px 20px;
+        }
+        .profile {
+            display: flex;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 18px;
+        }
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-right: 60px;
+            margin-top: 40px;
+        }
+        .profile-details {
+            flex-grow: 1;
+        }
+        .profile-name {
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .profile-info {
+            font-size: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .transfer-section, .stats-section {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .stat-box {
+            background-color: rgba(129, 162, 210, 0.64);
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="container">
+    <div class="header mt-3">
+        <h2>Chi tiết cầu thủ</h2>
+    </div>
+    <div class="profile">
+        <img src="{{cau_thu.hinh_anh}}" class="profile-image">
+        <div class="profile-details">
+            <div class="profile-name">{{cau_thu.ten}}</div>
+            <div style="font-size: 20px">Quốc tịch: {{cau_thu.quoc_tich}}</div>
+            <div class="profile-info">
+                <div>
+                    <div>Ngày sinh: {{cau_thu.ngay_sinh|date:"d/m/Y"}} ({{cau_thu.tuoi}} tuổi)</div>
+                    <div>
+                        Câu lạc bộ: <a href="/cau-lac-bo/{{cau_thu.doi_bong.pk}}" >{{cau_thu.doi_bong.ten}}</a>
+                    </div>
+                    <div>Vị trí: {{cau_thu.vi_tri}}</div>
+                     <div>Số áo: {{cau_thu.so_ao}}</div>
+                    <div>Chiều cao: {{cau_thu.chieu_cao}}m</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="stats-section">
+        <h3>Danh hiệu</h3>
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat({{ danh_hieu|length }}, 1fr); gap: 10px; margin-top: 20px;">            {% for i in danh_hieu %}
+            <div class="stat-box">
+                <div class="stat-value">{{i}}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Add more detailed statistics tables here -->
+    </div>
+    <div class="transfer-section">
+        <h3>Hợp đồng</h3>
+        <table>
+            <tr>
+                <th>Mã hợp đồng</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Lương</th>
+                <th>Thưởng</th>
+            </tr>
+            <tr>
+                <td>{{hop_dong.ma_hop_dong}}</td>
+                <td>{{hop_dong.ngay_bat_dau}}</td>
+                <td>{{hop_dong.ngay_ket_thuc}}</td>
+                <td>{{hop_dong.luong}}</td>
+                <td>{{hop_dong.thuong}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

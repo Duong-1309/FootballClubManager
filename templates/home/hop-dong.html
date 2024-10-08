@@ -1,0 +1,142 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#">Hợp đồng</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Mặc định</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Hợp đồng</h3>
+                </div>
+                <!-- Light table -->
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col" class="sort" data-sort="name">Mã hợp đồng</th>
+                            <th scope="col" class="sort" data-sort="budget">Ngày bắt đầu</th>
+                            <th scope="col" class="sort" data-sort="status">Ngày kết thúc</th>
+                            <th scope="col">Lương</th>
+                            <th scope="col" class="sort" data-sort="completion">Thưởng</th>
+                            <th scope="col" class="sort" data-sort="completion">Phí bồi thường hợp đồng</th>
+                            <th scope="col" class="sort" data-sort="completion">Cầu thủ</th>
+                            <th scope="col" class="sort" data-sort="completion">Huấn luyện viên</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody class="list">
+                        {% for hop_dong in ds_hop_dong %}
+                        <tr>
+                            <td class="budget">{{hop_dong.ma_hop_dong}}</td>
+                            <td class="budget">{{hop_dong.ngay_bat_dau|date:"d/m/y"}}</td>
+                            <td class="budget">{{hop_dong.ngay_ket_thuc|date:"d/m/y"}}</td>
+                            <td class="budget">{{hop_dong.luong}}</td>
+                            <td class="budget">{{hop_dong.thuong}}</td>
+                            <td class="budget">{{hop_dong.phi_pha_vo_hop_dong}}</td>
+                            <td>
+                                {% if hop_dong.cau_thu %}
+                                <div class="avatar-group">
+                                    <a href="/cau-thu/{{hop_dong.cau_thu.ma_cau_thu}}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
+                                       data-original-title="{{ hop_dong.cau_thu.ten}}">
+                                        <img src="{{hop_dong.cau_thu.hinh_anh}}">
+                                    </a>
+                                    <label class="top" >{{ hop_dong.cau_thu.ten}}</label>
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if hop_dong.huan_luyen_vien %}
+                                <div class="avatar-group">
+                                    <a href="/huan-luyen-vien/{{hop_dong.huan_luyen_vien.pk}}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
+                                       data-original-title="{{ hop_dong.huan_luyen_vien.ten}}">
+                                        <img alt="Image placeholder" src="{{hop_dong.huan_luyen_vien.hinh_anh}}">
+                                    </a>
+                                    <label>{{ hop_dong.huan_luyen_vien.ten}}</label>
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td class="text-right">
+                                <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        <a class="dropdown-item" href="#">Chi tiết</a>
+                                        <a class="dropdown-item" href="#">Xuất hợp đồng</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Card footer -->
+                <div class="card-footer py-4">
+                    <nav aria-label="...">
+                        <ul class="pagination justify-content-end mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">
+                                    <i class="fas fa-angle-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+{% endblock javascripts %}

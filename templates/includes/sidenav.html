@@ -1,0 +1,66 @@
+<nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+  <div class="scrollbar-inner">
+    <!-- Brand -->
+    <div class="sidenav-header  align-items-center">
+      <a class="navbar-brand" href="/">
+        <img src="/static/assets/img/brand/logo-fbm.png" class="navbar-brand-img" alt="Football Club Manager">
+      </a>
+    </div>
+    <div class="navbar-inner">
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Nav items -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link {% if 'index' in segment %} active {% endif %}" href="/">
+              <i class="ni ni-tv-2 text-primary"></i>
+              <span class="nav-link-text">Tranh chính</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'cau_lac_bo' in segment %} active {% endif %}" href="/cau-lac-bo">
+              <i class="ni ni-world text-primary"></i>
+              <span class="nav-link-text">Câu lạc bộ</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'cau_thu' in segment %} active {% endif %}" href="/cau-thu">
+              <i class="ni ni-user-run text-primary"></i>
+              <span class="nav-link-text">Cầu thủ</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'huan_luyen_vien' in segment %} active {% endif %}" href="/huan-luyen-vien">
+              <i class="ni ni-glasses-2 text-primary"></i>
+              <span class="nav-link-text">Huấn luyện viên</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'hop_dong' in segment %} active {% endif %}" href="/hop-dong">
+              <i class="ni ni-collection text-primary"></i>
+              <span class="nav-link-text">Hợp đồng</span>
+            </a>
+          </li>
+        </ul>
+        <hr class="my-3">
+        <!-- Heading -->
+        <h6 class="navbar-heading p-0 text-muted">
+          <span class="docs-normal">Khác</span>
+        </h6>
+        <!-- Navigation -->
+        <ul class="navbar-nav mb-md-3">
+
+          <li class="nav-item"">
+            <a class="nav-link"
+               target="_blank"
+               href="/login">
+              <i class="ni ni-archive-2"></i>
+              <span class="nav-link-text">Đăng xuất</span>
+            </a>
+          </li>
+        </ul>
+        <!-- Divider -->
+      </div>
+    </div>
+  </div>
+</nav>
