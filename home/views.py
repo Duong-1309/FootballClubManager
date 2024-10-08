@@ -7,10 +7,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 
-from home.models import DoiBong, HopDong, CauThu, HuanLuyenVien, ThanhTichDoiBong
+from home.models import DoiBong, HopDong, CauThu, HuanLuyenVien
 from django.shortcuts import render, get_object_or_404
-from django.db.models import Count
-
+from django.http import HttpResponse
+from .models import CauThu
 @login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
@@ -29,19 +29,13 @@ def index(request):
                           2) if s_hop_dong_thang_truoc != 0 else 0
         }
     }
-    s_cau_thu_theo_clb = CauThu.objects.values('doi_bong__ten').annotate(count=Count('doi_bong')).order_by('-count')
-    bieu_do_cau_thu_theo_clb = {
-        "labels": [item['doi_bong__ten'] for item in s_cau_thu_theo_clb],
-        "data": [item['count'] for item in s_cau_thu_theo_clb]
-    }
-    bieu_do_hlv_theo_clb = HuanLuyenVien.objects.values('doi_bong__ten').annotate(count=Count('doi_bong')).order_by('-count')
-    bieu_do_hlv_theo_clb = {
-        "labels": [item['doi_bong__ten'] for item in bieu_do_hlv_theo_clb],
-        "data": [item['count'] for item in bieu_do_hlv_theo_clb]
+    bieu_do_luong = {
+        "labels": ["Cầu thủ", "Huấn luyện viên"],
+        "data": [s_cau_thu, s_hlv],
     }
     context['tong_quan'] = tong_quan
-    context['bieu_do_hlv_theo_clb'] = bieu_do_hlv_theo_clb
-    context['bieu_do_cau_thu_theo_clb'] = bieu_do_cau_thu_theo_clb
+    context['bieu_do_luong'] = bieu_do_luong
+
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -56,7 +50,7 @@ def chi_tiet_cau_lac_bo(request, DoiBong_id):
     clb = get_object_or_404(DoiBong, pk=DoiBong_id)
     ds_huan_luyen_vien = HuanLuyenVien.objects.filter(doi_bong=clb)
     ds_cau_thu = CauThu.objects.filter(doi_bong=clb)
-    ds_thanh_tich = ThanhTichDoiBong.objects.filter(doi_bong=clb)
+
     context = {
         'ten_clb': clb.ten,
         'logo_clb': clb.logo,
@@ -66,23 +60,46 @@ def chi_tiet_cau_lac_bo(request, DoiBong_id):
         'nam_thanh_lap': clb.nam_thanh_lap,
         'ds_huan_luyen_vien': ds_huan_luyen_vien,
         'ds_cau_thu': ds_cau_thu,
-        'ds_thanh_tich': ds_thanh_tich,
-        'segment': 'chi-tiet-cau-lac-bo'
     }
 
     return render(request, 'home/chi-tiet-cau-lac-bo.html', context)
+
+
+def str(e):
+    pass
+
+
 @login_required(login_url="/login/")
 def cau_thu(request):
-    ds_cau_thu = CauThu.objects.all().order_by('ten')
-    context = {
-        'ds_cau_thu': ds_cau_thu,
-        'ten_cau_thu': ds_cau_thu,
-        'hinh_anh_cau_thu': ds_cau_thu,
-        'vi_tri_cau_thu': ds_cau_thu,
+    try:
+        # Lấy danh sách cầu thủ và sắp xếp theo tên
+        ds_cau_thu = CauThu.objects.all().order_by('ten')
 
-        'segment': 'cau_thu'}
-    html_template = loader.get_template('home/cau-thu.html')
-    return HttpResponse(html_template.render(context, request))
+        # Lấy thông tin câu lạc bộ cho mỗi cầu thủ (dựa trên quan hệ ForeignKey)
+        ds_cau_thu_with_clb = [
+            {
+                'ten': cau_thu.ten,
+                'ten_clb': cau_thu.doi_bong.ten,  # Lấy tên câu lạc bộ của cầu thủ
+                'vi_tri': cau_thu.vi_tri,  # Lấy vị trí của cầu thủ
+                'hinh_anh':cau_thu.hinh_anh,
+                'bieu_tuong':cau_thu.doi_bong.logo
+
+            }
+            for cau_thu in ds_cau_thu
+        ]
+
+        context = {
+            'ds_cau_thu': ds_cau_thu_with_clb,
+            'segment': 'cau_thu',
+        }
+
+        # Render template với context đã được truyền vào
+        return render(request, 'home/cau-thu.html', context)
+
+    except Exception as e:
+        # Để debug dễ dàng hơn, bạn có thể in ra lỗi
+        return HttpResponse(f"Đã xảy ra lỗi: {str(e)}")
+
 
 @login_required(login_url="/login/")
 def chi_tiet_cau_thu(request, id):
@@ -103,9 +120,35 @@ def chi_tiet_cau_thu(request, id):
 
 @login_required(login_url="/login/")
 def huan_luyen_vien(request):
-    context = {'segment': 'huan_luyen_vien'}
-    html_template = loader.get_template('home/huan-luyen-vien.html')
-    return HttpResponse(html_template.render(context, request))
+    try:
+        # Lấy danh sách cầu thủ và sắp xếp theo tên
+        ds_huan_luyen_vien = HuanLuyenVien.objects.all().order_by('ten')
+
+        # Lấy thông tin câu lạc bộ cho mỗi cầu thủ (dựa trên quan hệ ForeignKey)
+        ds_huan_luyen_vien_with_clb = [
+            {
+                'ten': huan_luyen_vien.ten,
+                'ten_clb': huan_luyen_vien.doi_bong.ten,  # Lấy tên câu lạc bộ của cầu thủ
+                'chuyen_mon': huan_luyen_vien.chuyen_mon,  # Lấy vị trí của hlv
+                'hinh_anh':huan_luyen_vien.hinh_anh,
+                'bieu_tuong':huan_luyen_vien.doi_bong.logo
+
+            }
+            for huan_luyen_vien in ds_huan_luyen_vien
+        ]
+
+        context = {
+            'ds_huan_luyen_vien': ds_huan_luyen_vien_with_clb,
+            'segment': 'huan_luyen_vien',
+        }
+
+        # Render template với context đã được truyền vào
+        return render(request, 'home/huan-luyen-vien.html', context)
+
+    except Exception as e:
+        # Để debug dễ dàng hơn, bạn có thể in ra lỗi
+        return HttpResponse(f"Đã xảy ra lỗi: {str(e)}")
+
 
 @login_required(login_url="/login/")
 def chi_tiet_huan_luyen_vien(request, id):
