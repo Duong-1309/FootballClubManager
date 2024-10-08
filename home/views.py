@@ -1,5 +1,5 @@
 import datetime
-from lib2to3.fixes.fix_input import context
+from django.db.models import Count
 
 from django import template
 from django.contrib.auth.decorators import login_required
@@ -11,6 +11,7 @@ from home.models import DoiBong, HopDong, CauThu, HuanLuyenVien, KinhNghiemHuanL
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import CauThu
+
 @login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
@@ -29,12 +30,20 @@ def index(request):
                           2) if s_hop_dong_thang_truoc != 0 else 0
         }
     }
-    bieu_do_luong = {
-        "labels": ["Cầu thủ", "Huấn luyện viên"],
-        "data": [s_cau_thu, s_hlv],
+    s_cau_thu_theo_clb = CauThu.objects.values('doi_bong__ten').annotate(count=Count('doi_bong')).order_by('-count')
+    bieu_do_cau_thu_theo_clb = {
+        "labels": [item['doi_bong__ten'] for item in s_cau_thu_theo_clb],
+        "data": [item['count'] for item in s_cau_thu_theo_clb]
+    }
+    bieu_do_hlv_theo_clb = HuanLuyenVien.objects.values('doi_bong__ten').annotate(count=Count('doi_bong')).order_by(
+        '-count')
+    bieu_do_hlv_theo_clb = {
+        "labels": [item['doi_bong__ten'] for item in bieu_do_hlv_theo_clb],
+        "data": [item['count'] for item in bieu_do_hlv_theo_clb]
     }
     context['tong_quan'] = tong_quan
-    context['bieu_do_luong'] = bieu_do_luong
+    context['bieu_do_hlv_theo_clb'] = bieu_do_hlv_theo_clb
+    context['bieu_do_cau_thu_theo_clb'] = bieu_do_cau_thu_theo_clb
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
