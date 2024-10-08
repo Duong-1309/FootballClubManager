@@ -3,7 +3,7 @@ from lib2to3.fixes.fix_input import context
 
 from django import template
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.urls import reverse
 
@@ -38,6 +38,19 @@ def index(request):
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
+
+
+@login_required(login_url="/login/")
+def tim_kiem(request):
+    q = request.GET.get('q')
+    cauthu = CauThu.objects.filter(ten__icontains=q).values('ma_cau_thu', 'ten', 'hinh_anh')[:3]
+    huanluyenvien = HuanLuyenVien.objects.filter(ten__icontains=q).values('ma_hlv', 'ten', 'hinh_anh')[:3]
+    doi_bong = DoiBong.objects.filter(ten__icontains=q).values('ma_doi_bong', 'ten', 'logo')[:3]
+    return JsonResponse({
+        'cau_thu': list(cauthu),
+        'huan_luyen_vien': list(huanluyenvien),
+        'doi_bong': list(doi_bong)
+    })
 
 @login_required(login_url="/login/")
 def cau_lac_bo(request):

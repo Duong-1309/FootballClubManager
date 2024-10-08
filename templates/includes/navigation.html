@@ -4,11 +4,26 @@
       <!-- Search form -->
       <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
         <div class="form-group mb-0">
-          <div class="input-group input-group-alternative input-group-merge">
+          <div class="input-group input-group-alternative input-group-merge" style="position: relative;">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-search"></i></span>
             </div>
-            <input class="form-control" placeholder="Search" type="text">
+            <input class="form-control" id="input-search" placeholder="Search" type="text">
+            <div id="search-suggest" style="
+                  position: absolute;
+                  bottom: -5px;
+                  left: 0;
+                  width: 100%;
+                  transform: translateY(100%);););););
+                  background: white;
+                  color: white;
+                  border-radius: 20px;
+                  z-index: 9;
+                  padding: 10px 12px;
+                  display: none;
+              ">
+
+            </div>
           </div>
         </div>
         <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
@@ -28,7 +43,7 @@
           </div>
         </li>
         <li class="nav-item d-sm-none">
-          <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+          <a class="nav-link" href="" data-action="search-show" data-target="#navbar-search-main">
             <i class="ni ni-zoom-split-in"></i>
           </a>
         </li>
@@ -226,3 +241,86 @@
     </div>
   </div>
 </nav>
+<script>
+  document.getElementById('input-search').addEventListener('change', function(e) {
+    e.preventDefault();
+    const query = this.value;
+      if (query.length > 0) {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', `/tim-kiem?q=${query}`, true);
+          xhr.onload = function() {
+              if (xhr.status === 200) {
+                  const results = JSON.parse(xhr.responseText);
+                  const suggestionDiv = document.getElementById('search-suggest');
+                  suggestionDiv.innerHTML = ''; // Clear previous suggestions
+                  const doibong = results.doi_bong;
+                  const cauthu = results.cau_thu;
+                  const hlv = results.huan_luyen_vien;
+
+                  let resultHtml = '';
+                  if (cauthu.length > 0) {
+                      cauthu.forEach(cau_thu => {
+                          resultHtml += `
+                          <tr>
+                              <td class="budget">Cầu thủ</td>
+                              <td class="budget">
+                                  <a href="/cau-thu/${cau_thu.ma_cau_thu}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
+                                     data-original-title="${cau_thu.ten}">
+                                      <img src="${cau_thu.hinh_anh}">
+                                  </a>
+                              </td>
+                              <td class="budget">${cau_thu.ten}</td>
+                          </tr>
+                         `;
+                      });
+                  }
+                  console.log('hlv', hlv);
+                  if (hlv.length > 0) {
+                      hlv.forEach(item => {
+                          resultHtml += `
+                          <tr>
+                              <td class="budget">HLV</td>
+                              <td class="budget">
+                                  <a href="/huan-luyen-vien/${item.ma_hlv}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
+                                     data-original-title="${item.ten}">
+                                      <img src="${item.hinh_anh}">
+                                  </a>
+                              </td>
+                              <td class="budget">${item.ten}</td>
+                          </tr>
+                         `;
+                      });
+                  }
+                  if (doibong.length > 0) {
+                      doibong.forEach(item => {
+                          resultHtml += `
+                          <tr>
+                              <td class="budget">Đội bóng</td>
+                              <td class="budget">
+                                  <a href="/cau-lac-bo/${item.ma_doi_bong}" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
+                                     data-original-title="${item.ten}">
+                                      <img src="${item.logo}">
+                                  </a>
+                              </td>
+                              <td class="budget">${item.ten}</td>
+                          </tr>
+                         `;
+                      });
+                  }
+                  let tableHtml = `
+                    <table class="table align-items-center table-flush">
+                        <tbody class="list">
+                            ${resultHtml}
+                        </tbody>
+                    </table>
+                  `
+                  suggestionDiv.innerHTML = tableHtml;
+                  document.getElementById('search-suggest').style.display = 'block';
+              }
+          };
+          xhr.send();
+      } else {
+          document.getElementById('search-suggest').style.display = 'none';
+      }
+  });
+</script>
