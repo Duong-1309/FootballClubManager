@@ -7,7 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.urls import reverse
 
-from home.models import DoiBong, HopDong, CauThu, HuanLuyenVien
+from home.models import DoiBong, HopDong, CauThu, HuanLuyenVien, KinhNghiemHuanLuyen
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import CauThu
@@ -172,12 +172,14 @@ def chi_tiet_huan_luyen_vien(request, id):
         html_template = loader.get_template('home/page-404.html')
         return HttpResponse(html_template.render({}, request))
     hop_dong = HopDong.objects.filter(huan_luyen_vien=hlv).first()
+    kinh_nghiem = KinhNghiemHuanLuyen.objects.filter(huan_luyen_vien=hlv).order_by('-nam_ket_thuc')
     context = {
         'segment': 'huan_luyen_vien',
         'hlv': hlv,
         'tuoi': datetime.date.today().year - hlv.ngay_sinh.year if hlv.ngay_sinh else None,
         'hop_dong': hop_dong,
-        'danh_hieu': hlv.danh_hieu.split(",") if hlv.danh_hieu else []
+        'danh_hieu': hlv.danh_hieu.split(",") if hlv.danh_hieu else [],
+        'ds_kinh_nghiem': kinh_nghiem
     }
     html_template = loader.get_template('home/chi-tiet-huan-luyen-vien.html')
     return HttpResponse(html_template.render(context, request))

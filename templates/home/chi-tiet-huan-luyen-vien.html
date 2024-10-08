@@ -132,6 +132,25 @@
             </tr>
         </table>
     </div>
+    <div class="transfer-section">
+        <h3>Kinh nghiệm huấn luyện</h3>
+        <table>
+            <tr>
+                <th>Đội bóng</th>
+                <th>Từ năm</th>
+                <th>Tới năm</th>
+                <th>Thành tích</th>
+            </tr>
+            {% for kinh_nghiem in ds_kinh_nghiem %}
+            <tr>
+                <td>{{kinh_nghiem.ten_doi_bong}}</td>
+                <td>{{kinh_nghiem.nam_bat_dau}}</td>
+                <td>{{kinh_nghiem.nam_ket_thuc}}</td>
+                <td>{{kinh_nghiem.thanh_tich}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 {% endblock content %}
 
