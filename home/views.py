@@ -7,7 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.urls import reverse
 
-from home.models import DoiBong, HopDong, CauThu, HuanLuyenVien, KinhNghiemHuanLuyen
+from home.models import DoiBong, HopDong, CauThu, HuanLuyenVien, KinhNghiemHuanLuyen, ThanhTichDoiBong
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import CauThu
@@ -63,6 +63,7 @@ def chi_tiet_cau_lac_bo(request, DoiBong_id):
     clb = get_object_or_404(DoiBong, pk=DoiBong_id)
     ds_huan_luyen_vien = HuanLuyenVien.objects.filter(doi_bong=clb)
     ds_cau_thu = CauThu.objects.filter(doi_bong=clb)
+    ds_thanh_tich = ThanhTichDoiBong.objects.filter(doi_bong=clb)
 
     context = {
         'ten_clb': clb.ten,
@@ -73,6 +74,8 @@ def chi_tiet_cau_lac_bo(request, DoiBong_id):
         'nam_thanh_lap': clb.nam_thanh_lap,
         'ds_huan_luyen_vien': ds_huan_luyen_vien,
         'ds_cau_thu': ds_cau_thu,
+        'ds_thanh_tich': ds_thanh_tich,
+        'segment': 'chi-tiet-cau-lac-bo'
     }
 
     return render(request, 'home/chi-tiet-cau-lac-bo.html', context)
