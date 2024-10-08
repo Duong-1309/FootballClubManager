@@ -8,6 +8,7 @@ from home import views
 
 urlpatterns = [
     path('', views.index, name='home'),
+    path('tim-kiem', views.tim_kiem, name='tim_kiem'),
     path('cau-lac-bo/', views.cau_lac_bo, name='cau-lac-bo'),
     path('cau-lac-bo/<int:DoiBong_id>', views.chi_tiet_cau_lac_bo, name='chi-tiet-cau-lac-bo'),
     path('cau-thu/', views.cau_thu, name='cau-thu'),
