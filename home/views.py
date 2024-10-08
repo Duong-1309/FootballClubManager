@@ -82,7 +82,8 @@ def cau_thu(request):
                 'ten_clb': cau_thu.doi_bong.ten,  # Lấy tên câu lạc bộ của cầu thủ
                 'vi_tri': cau_thu.vi_tri,  # Lấy vị trí của cầu thủ
                 'hinh_anh':cau_thu.hinh_anh,
-                'bieu_tuong':cau_thu.doi_bong.logo
+                'bieu_tuong':cau_thu.doi_bong.logo,
+                'ma_cau_thu': cau_thu.ma_cau_thu
 
             }
             for cau_thu in ds_cau_thu
@@ -131,7 +132,8 @@ def huan_luyen_vien(request):
                 'ten_clb': huan_luyen_vien.doi_bong.ten,  # Lấy tên câu lạc bộ của cầu thủ
                 'chuyen_mon': huan_luyen_vien.chuyen_mon,  # Lấy vị trí của hlv
                 'hinh_anh':huan_luyen_vien.hinh_anh,
-                'bieu_tuong':huan_luyen_vien.doi_bong.logo
+                'bieu_tuong':huan_luyen_vien.doi_bong.logo,
+                'ma_huan_luyen_vien':huan_luyen_vien.ma_hlv
 
             }
             for huan_luyen_vien in ds_huan_luyen_vien
