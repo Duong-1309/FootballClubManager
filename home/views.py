@@ -1,16 +1,14 @@
 import datetime
 from django.db.models import Count
 
-from django import template
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.template import loader
-from django.urls import reverse
 
 from home.models import DoiBong, HopDong, CauThu, HuanLuyenVien, KinhNghiemHuanLuyen, ThanhTichDoiBong
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import CauThu
+
 
 @login_required(login_url="/login/")
 def index(request):
@@ -61,11 +59,13 @@ def tim_kiem(request):
         'doi_bong': list(doi_bong)
     })
 
+
 @login_required(login_url="/login/")
 def cau_lac_bo(request):
     context = {'segment': 'cau_lac_bo'}
     html_template = loader.get_template('home/cau-lac-bo.html')
     return HttpResponse(html_template.render(context, request))
+
 
 @login_required(login_url="/login/")
 def chi_tiet_cau_lac_bo(request, DoiBong_id):
@@ -90,10 +90,6 @@ def chi_tiet_cau_lac_bo(request, DoiBong_id):
     return render(request, 'home/chi-tiet-cau-lac-bo.html', context)
 
 
-def str(e):
-    pass
-
-
 @login_required(login_url="/login/")
 def cau_thu(request):
     try:
@@ -106,8 +102,8 @@ def cau_thu(request):
                 'ten': cau_thu.ten,
                 'ten_clb': cau_thu.doi_bong.ten,  # Lấy tên câu lạc bộ của cầu thủ
                 'vi_tri': cau_thu.vi_tri,  # Lấy vị trí của cầu thủ
-                'hinh_anh':cau_thu.hinh_anh,
-                'bieu_tuong':cau_thu.doi_bong.logo,
+                'hinh_anh': cau_thu.hinh_anh,
+                'bieu_tuong': cau_thu.doi_bong.logo,
                 'ma_cau_thu': cau_thu.ma_cau_thu
 
             }
@@ -156,9 +152,9 @@ def huan_luyen_vien(request):
                 'ten': huan_luyen_vien.ten,
                 'ten_clb': huan_luyen_vien.doi_bong.ten,  # Lấy tên câu lạc bộ của cầu thủ
                 'chuyen_mon': huan_luyen_vien.chuyen_mon,  # Lấy vị trí của hlv
-                'hinh_anh':huan_luyen_vien.hinh_anh,
-                'bieu_tuong':huan_luyen_vien.doi_bong.logo,
-                'ma_huan_luyen_vien':huan_luyen_vien.ma_hlv
+                'hinh_anh': huan_luyen_vien.hinh_anh,
+                'bieu_tuong': huan_luyen_vien.doi_bong.logo,
+                'ma_huan_luyen_vien': huan_luyen_vien.ma_hlv
 
             }
             for huan_luyen_vien in ds_huan_luyen_vien
@@ -168,10 +164,8 @@ def huan_luyen_vien(request):
             'ds_huan_luyen_vien': ds_huan_luyen_vien_with_clb,
             'segment': 'huan_luyen_vien',
         }
-
         # Render template với context đã được truyền vào
         return render(request, 'home/huan-luyen-vien.html', context)
-
     except Exception as e:
         # Để debug dễ dàng hơn, bạn có thể in ra lỗi
         return HttpResponse(f"Đã xảy ra lỗi: {str(e)}")
@@ -195,6 +189,7 @@ def chi_tiet_huan_luyen_vien(request, id):
     }
     html_template = loader.get_template('home/chi-tiet-huan-luyen-vien.html')
     return HttpResponse(html_template.render(context, request))
+
 
 @login_required(login_url="/login/")
 def hop_dong(request):

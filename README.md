@@ -1,24 +1,36 @@
 # FootballClubManager
-
+## Các bước chạy demo
 Tạo môi trường ảo
 ```bash
 # window and linux
-python3 -m venv myvenv
+python3 -m venv venv
 ```
 
 Active môi trường ảo
 ```bash
 # windowm
-.venv\Scripts\activate
+venv\Scripts\activate
 # linux, macosvenv\Scripts\activate
-source myvenv/bin/activate
+source venv/bin/activate
 ``` 
 
 Cài đặt các package cần thiết:
 ```bash
 pip install -r requirements.txt
 ```
+---
 
+### Trường hợp demo đã có sẵn database(file db.sqlite3)
+```bash
+python manage.py runserver
+```
+Truy cập vào trình duyệt với địa chỉ: http://127.0.0.1:8000/
+
+User demo: `admin`|`admin`
+
+
+---
+### Trường hợp chưa có database(dành cho dev) 
 Migrate database
 ```bash
 python manage.py migrate
