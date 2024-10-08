@@ -38,7 +38,7 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
 
-            msg = 'User created - please <a href="/login">login</a>.'
+            msg = 'Tạo thành công - vui lòng <a href="/login">đăng nhập</a>.'
             success = True
 
             # return redirect("/login/")

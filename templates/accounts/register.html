@@ -16,7 +16,7 @@
           <div class="card bg-secondary shadow border-0">
             <div class="card-header bg-transparent pb-5">
               <div class="text-muted text-center mt-2 mb-4">
-                Sign UP
+                Đăng ký
               </div>
             </div>
             <div class="card-body px-lg-5 py-lg-5">
@@ -25,7 +25,7 @@
                 {% if msg %}
                   <small>{{ msg | safe }}</small>
                 {% else %}
-                  Add your credentials
+                  Nhập thông tin tài khoản
                 {% endif %}  
               
               </div>
@@ -81,13 +81,13 @@
                       <div class="custom-control custom-control-alternative custom-checkbox">
                         <input class="custom-control-input" id="customCheckRegister" type="checkbox">
                         <label class="custom-control-label" for="customCheckRegister">
-                          <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
+                          <span class="text-muted">Đồng ý <a href="#!">Chính Sách</a></span>
                         </label>
                       </div>
                     </div>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                    <button type="submit" class="btn btn-primary mt-4">Tạo tài khoản</button>
                   </div>
                 </form>
 
@@ -102,10 +102,10 @@
       <div class="row mt-3">
         <div class="col-3"></div>
         <div class="col-3">
-          <a href="{% url 'login' %}" class="text-light"><small>Login</small></a>
+          <a href="{% url 'login' %}" class="text-light"><small>Đăng nhập</small></a>
         </div>
         <div class="col-3 text-right">
-          <a href="https://appseed.us/support" class="text-light"><small>Get Support</small></a>
+          <a href="#" class="text-light"><small>Hỗ trợ</small></a>
         </div>
       </div>
 
